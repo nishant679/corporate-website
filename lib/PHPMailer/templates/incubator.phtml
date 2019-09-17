@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+  <head>
+    <title><?php echo $templateData['subject']; ?></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width">
+  </head>
+  <body>
+    <h2 style="margin-top: 10px; margin-bottom: 15px; text-align: center; font-size: 18px;"><?php echo $templateData['subject']; ?></h2>
+    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="width: 100%; border: 2px solid #ccc; border-collapse: collapse; font-size: 13px;">
+      <tbody>
+        <tr>
+          <td style="border-bottom: 2px solid #ccc; padding: 10px; width: 130px;"><strong>First Name</strong></td>
+          <td style="border-bottom: 2px solid #ccc; padding: 10px;"><?php echo $templateData['firstName']; ?></td>
+        </tr>
+        <tr>
+          <td style="border-bottom: 2px solid #ccc; padding: 10px; width: 130px;"><strong>Last Name</strong></td>
+          <td style="border-bottom: 2px solid #ccc; padding: 10px;"><?php echo $templateData['lastName']; ?></td>
+        </tr>
+        <tr>
+          <td style="border-bottom: 2px solid #ccc; padding: 10px; width: 130px;"><strong>Company</strong></td>
+          <td style="border-bottom: 2px solid #ccc; padding: 10px;"><?php echo $templateData['company']; ?></td>
+        </tr>
+        <tr>
+          <td style="border-bottom: 2px solid #ccc; padding: 10px; width: 130px;"><strong>Phone</strong></td>
+          <td style="border-bottom: 2px solid #ccc; padding: 10px;"><?php echo $templateData['phone']; ?></td>
+        </tr>
+        <tr>
+          <td style="border-bottom: 2px solid #ccc; padding: 10px; width: 130px;"><strong>Email</strong></td>
+          <td style="border-bottom: 2px solid #ccc; padding: 10px;"><?php echo $templateData['email']; ?></td>
+        </tr>
+        <tr>
+          <td style="border-bottom: 2px solid #ccc; padding: 10px; width: 130px;"><strong>Country</strong></td>
+          <td style="border-bottom: 2px solid #ccc; padding: 10px;"><?php echo $templateData['country']; ?></td>
+        </tr>
+        <tr>
+          <td style="border-bottom: 2px solid #ccc; padding: 10px; width: 130px;"><strong>Budget</strong></td>
+          <td style="border-bottom: 2px solid #ccc; padding: 10px;">$<?php echo $templateData['budget']; ?></td>
+        </tr>
+        <tr>
+          <td style="border-bottom: 2px solid #ccc; padding: 10px; width: 130px;"><strong>Description</strong></td>
+          <td style="border-bottom: 2px solid #ccc; padding: 10px;"><?php echo $templateData['description']; ?></td>
+        </tr>
+        <?php if (!empty($templateData['requestNDA'])) : ?>
+          <tr>
+            <td style="border-bottom: 2px solid #ccc; padding: 10px; width: 130px;"><strong>Request NDA</strong></td>
+            <td style="border-bottom: 2px solid #ccc; padding: 10px;"><?php echo $templateData['requestNDA']; ?></td>
+          </tr>
+        <?php endif; ?>
+        <tr>
+          <td style="border-bottom: 2px solid #ccc; padding: 10px; width: 130px;"><strong>Sent</strong></td>
+          <td style="border-bottom: 2px solid #ccc; padding: 10px;"><?php echo date("d. M Y, H:i:s") ?></td>
+        </tr>
+
+      </tbody>
+    </table>
+    <p style="margin-top: 15px; color: #ccc; text-align: center; font-size: 11px;">This email is received from the contact form on mckinleyrice.com, from the Incubator page.</p>
+  </body>
+</html>

@@ -1,0 +1,11 @@
+.well {
+    margin-top: 20px;
+    padding-top: 0;
+    text-align: center;
+}
+
+.youCover.icon2::before{
+    background-image: url("https://lh3.googleusercontent.com/pqnpzpWfCCHVu6mqwtr-ueJHrYzTUFVzQNIwqqQ8016APeEI8ZxmBzu-q3thtlhwDrVX=w300");
+}
+
+
