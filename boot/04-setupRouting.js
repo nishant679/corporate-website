@@ -8,8 +8,9 @@ const apiRouter = require('../routes/index');
  * Setup Routing for api and react production build
  * @param app
  */
-module.exports = function (app) {
+module.exports = async function (app) {
     app.use('/api', apiRouter);
+    app.use('/public', express.static(path.join(__dirname, '..', 'public')));
 
     /**
      * In Production Mode serve build react files

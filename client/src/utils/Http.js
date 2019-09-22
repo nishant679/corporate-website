@@ -1,10 +1,10 @@
 import {create} from 'axios';
+import config from "../config/config";
+import {TOKEN} from "./constants";
 
 export default create({
-    baseURL: '/api',
+    baseURL: `${config.API_URL}/api`,
     headers: {
-        'Authorization': localStorage.getItem('access_token'),
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
+        Authorization: localStorage.getItem(TOKEN)
     }
 });

@@ -1,0 +1,24 @@
+@import "./../../scss/mixins";
+
+.logo {
+  height: 32px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px;
+}
+
+.header {
+  background: #fff;
+  padding: 0 0 0 10px;
+}
+
+.layout {
+  height: 100%;
+}
+
+.content {
+  margin: 24px 16px 0;
+  background: white;
+  @include mobile-and-tablet {
+    margin: 10px;
+  }
+}

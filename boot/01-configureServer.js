@@ -9,7 +9,7 @@ const path = require('path');
  * 2. Setup Logging using morgan
  * @param app
  */
-module.exports = function (app) {
+module.exports = async function (app) {
     app.use(logger('dev'));
     try {
         fs.accessSync(path.join(__dirname, '..', '.env'), fs.R_OK);

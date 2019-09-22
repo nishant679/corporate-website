@@ -1,0 +1,13 @@
+@import "./../../../scss/mixins";
+
+.table {
+  margin: 10px 20px;
+  @include mobile-and-tablet {
+    margin: 0;
+  }
+}
+
+.action {
+  word-break: keep-all;
+  white-space: nowrap;
+}
