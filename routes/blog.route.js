@@ -9,6 +9,9 @@ router.put('/:id', IsAuthenticated, blogController.update);
 router.delete('/:id', IsAuthenticated, blogController.destroy);
 //Upload Attachment
 router.post('/:id/attachments', IsAuthenticated, blogController.uploadAttachment);
+router.delete('/:id/attachments/:attachmentId', IsAuthenticated, blogController.deleteAttachment);
+
+router.post('/:id/coverImage', IsAuthenticated, blogController.uploadCoverImage);
 //Get Blog using slug
 router.get('/:slug', blogController.show);
 

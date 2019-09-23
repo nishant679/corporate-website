@@ -2,7 +2,7 @@
 const {BlogModel} = require('../models/blog.model');
 const upload = require('../utils/uploadFileHelper');
 const AppError = require('../utils/AppError');
-
+const mongoose = require('mongoose');
 /**
  * Create a Blog Post
  */
@@ -19,7 +19,6 @@ exports.store = async function (req, res, next) {
     try {
         const blog = await blogModel.save();
         res.json({
-            success: true,
             blog
         });
     } catch (e) {
@@ -37,7 +36,6 @@ exports.update = async function (req, res, next) {
             _id
         }, {$set: req.body});
         res.json({
-            success: true,
             result
         })
     } catch (e) {
@@ -71,6 +69,9 @@ exports.index = async function (req, res, next) {
     if (req.query._id) {
         query._id = req.query._id
     }
+    if (req.query.published) {
+        query.published = req.query.published
+    }
 
     try {
         const blogs = await BlogModel.find(query, projections, filters);
@@ -80,6 +81,13 @@ exports.index = async function (req, res, next) {
             count
         })
     } catch (e) {
+        if (e instanceof mongoose.CastError) {
+            res.json({
+                blogs: [],
+                count: 0
+            });
+            return;
+        }
         next(e)
     }
 };
@@ -146,10 +154,44 @@ exports.uploadAttachment = async function (req, res, next) {
         if (!blogPost) {
             throw new AppError('Blog Post Not Found', 404);
         }
-        const files = await upload(req, res);
-        files.forEach(file => {
-            blogPost.attachments.push(`${process.env.STATIC_FILES_DOMAIN}/${file.path}`);
+        const file = await upload(req, res);
+        blogPost.attachments.push({
+            title: req.body.title,
+            url: `${process.env.STATIC_FILES_DOMAIN}/${file.path}`
         });
+        const result = await blogPost.save();
+        res.json(result);
+    } catch (e) {
+        next(e);
+    }
+};
+
+exports.deleteAttachment = async function (req, res, next) {
+    try {
+        const blogPost = await BlogModel.findOne({
+            _id: req.params.id
+        });
+        if (!blogPost) {
+            throw new AppError('Blog Post Not Found', 404);
+        }
+        blogPost.attachments.id(req.params.attachmentId).remove();
+        const result = await blogPost.save();
+        res.json(result);
+    } catch (e) {
+        next(e);
+    }
+};
+
+exports.uploadCoverImage = async function (req, res, next) {
+    try {
+        const blogPost = await BlogModel.findOne({
+            _id: req.params.id
+        });
+        if (!blogPost) {
+            throw new AppError('Blog Post Not Found', 404);
+        }
+        const file = await upload(req, res);
+        blogPost.coverImage = `${process.env.STATIC_FILES_DOMAIN}/${file.path}`;
         const result = await blogPost.save();
         res.json(result);
     } catch (e) {

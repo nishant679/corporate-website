@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
+const {AttachmentSchema} = require("./attachment.model");
 const {ADMIN_MODEL} = require("./admin.model");
 
 const BLOG_MODEL = 'BlogModel';
@@ -20,7 +21,7 @@ const BlogSchema = new Schema({
             type: Schema.Types.String,
             required: true
         },
-        attachments: [String],
+        attachments: [AttachmentSchema],
         coverImage: Schema.Types.String,
         published: Schema.Types.Boolean,
         views: {

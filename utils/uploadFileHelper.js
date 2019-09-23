@@ -14,13 +14,13 @@ function UploadFileHelper(req, res) {
             cb(null, Date.now() + '-' + file.originalname)
         }
     });
-    const upload = multer({storage}).array('file');
+    const upload = multer({storage}).single('file');
     return new Promise((resolve, reject) => {
         upload(req, res, err => {
             if (err) {
                 return reject(err)
             } else {
-                resolve(req.files)
+                resolve(req.file)
             }
         })
     })
