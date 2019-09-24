@@ -4,7 +4,8 @@ import {Button, Card, Checkbox, Col, Form, Icon, Input, message, notification, R
 import Http from "../../../../utils/Http";
 import EditorComponent from "./EditorComponent";
 import AttachmentModal from "./AttachmentModal";
-import AttachmentComponent from "./AttachmentComponent"; // ES6
+import AttachmentComponent from "./AttachmentComponent";
+import {Link} from "react-router-dom"; // ES6
 
 function BlogEditPage({match, form, history}) {
     const [content, setContent] = useState('');
@@ -139,8 +140,13 @@ function BlogEditPage({match, form, history}) {
     return (
         <AdminLayout>
             <Card>
-                <h1>
-                    <span>Add New Blog </span>
+                <h1 onClick={history.goBack}>
+                    <Icon type="left"/>
+                    {
+                        isNewBlog ?
+                            <span>Add New Blog </span> :
+                            <span>Edit Blog </span>
+                    }
                     {
                         loading ?
                             <Icon type="loading" style={{fontSize: 18}} spin/>
