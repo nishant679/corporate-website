@@ -18,3 +18,19 @@
   align-items: center;
   justify-content: center;
 }
+
+.header {
+  background: #fff;
+  padding: 0 0 0 10px;
+}
+
+.logo {
+  display: inline-block;
+  margin-top: 0px;
+  height: 80%;
+
+  img {
+    height: 100%;
+    margin: 0;
+  }
+}
