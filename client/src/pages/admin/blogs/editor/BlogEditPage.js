@@ -140,12 +140,12 @@ function BlogEditPage({match, form, history}) {
     return (
         <AdminLayout>
             <Card>
-                <h1 onClick={history.goBack}>
+                <h1 onClick={history.goBack} style={{cursor: 'pointer'}}>
                     <Icon type="left"/>
                     {
                         isNewBlog ?
-                            <span>Add New Blog </span> :
-                            <span>Edit Blog </span>
+                            <span> Add New Blog </span> :
+                            <span> Edit Blog </span>
                     }
                     {
                         loading ?
