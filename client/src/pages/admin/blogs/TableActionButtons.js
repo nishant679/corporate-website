@@ -1,8 +1,9 @@
 import React from "react";
-import {Divider, message} from "antd";
+import {Divider, message, Popconfirm} from "antd";
 import {Link} from "react-router-dom";
 import Http from "../../../utils/Http";
 import styles from './styles.module.scss';
+import * as PropTypes from 'prop-types';
 
 function TableActionButtons({blogPost, refresh}) {
     async function changePublishStatus(published) {
@@ -37,9 +38,21 @@ function TableActionButtons({blogPost, refresh}) {
                     (<a onClick={() => changePublishStatus(true)}>Publish</a>)
             }
             <Divider type="vertical"/>
-            <a onClick={deleteBlogPost} style={{color: 'red'}}>Delete</a>
+            <Popconfirm
+                title="Are you sure delete this blog post?"
+                onConfirm={deleteBlogPost}
+                okText="Yes"
+                cancelText="No"
+            >
+                <a style={{color: 'red'}}>Delete</a>
+            </Popconfirm>
         </div>
     )
 }
+
+TableActionButtons.propTypes = {
+    blogPost: PropTypes.object.isRequired,
+    refresh: PropTypes.func.isRequired
+};
 
 export default TableActionButtons

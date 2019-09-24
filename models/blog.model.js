@@ -19,7 +19,6 @@ const BlogSchema = new Schema({
         },
         content: {
             type: Schema.Types.String,
-            required: true
         },
         attachments: [AttachmentSchema],
         coverImage: Schema.Types.String,

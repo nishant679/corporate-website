@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import AdminLayout from "../../../../components/AdminLayout/AdminLayout";
-import {Button, Checkbox, Col, Form, Icon, Input, message, notification, Row, Spin, Upload} from "antd";
+import {Button, Card, Checkbox, Col, Form, Icon, Input, message, notification, Row, Spin, Upload} from "antd";
 import Http from "../../../../utils/Http";
 import EditorComponent from "./EditorComponent";
 import AttachmentModal from "./AttachmentModal";
@@ -15,7 +15,7 @@ function BlogEditPage({match, form, history}) {
     const [loading, setLoading] = useState(false);
     const isNewBlog = !match.params.id;
     let blogId = match.params.id;
-    const {getFieldDecorator} = form;
+    const {getFieldDecorator, getFieldValue} = form;
 
     useEffect(() => {
         async function fetchBlogById() {
@@ -63,7 +63,7 @@ function BlogEditPage({match, form, history}) {
             values = await form.validateFields();
         } catch (e) {
             console.error(e);
-            return;
+            return false;
         }
         try {
             setLoading(true);
@@ -78,20 +78,33 @@ function BlogEditPage({match, form, history}) {
             console.log(data);
             if (isNewBlog) {
                 setData(data.blog);
-                history.push(`${match.path}/${data.blog._id}`)
+                history.replace(`${match.path}/${data.blog._id}`)
             }
+            setLoading(false);
+            return true;
 
         } catch (e) {
-            console.log(e);
-            message.error('Error Saving Blog Post')
+            console.log(e.response.data);
+            if (e.response && e.response.data && e.response.data.success === false) {
+                if (e.response.data.error.keyValue && e.response.data.error.keyValue.slug) {
+                    message.error('Duplicate Blog URL');
+                }
+            }
+            message.error('Error Saving Blog Post');
+            setLoading(false);
+            return false;
         }
-        setLoading(false);
+
     };
 
 
     async function uploadCoverImage(file, onSuccess, onError) {
+        let blogSaved = true;
         if (isNewBlog) {
-            await saveBlog();
+            blogSaved = await saveBlog();
+        }
+        if (!blogSaved) {
+            return;
         }
         const form = new FormData();
         form.set('file', file);
@@ -106,93 +119,109 @@ function BlogEditPage({match, form, history}) {
     }
 
     async function uploadAttachment() {
+        let blogSaved = true;
         if (isNewBlog) {
-            await saveBlog();
+            blogSaved = await saveBlog();
+        }
+        if (!blogSaved) {
+            return;
         }
         setAttachmentModalVisible(true)
     }
 
+    function generateSlug(title) {
+        return title
+            .toLowerCase()
+            .replace(/\s+/g, '-')
+        // .split(' ').join('-')
+    }
+
     return (
         <AdminLayout>
-            <h1>
-                <span>Add New Blog </span>
-                {
-                    loading ?
-                        <Icon type="loading" style={{fontSize: 18}} spin/>
-                        : <div/>
-                }
-            </h1>
-            <Form onSubmit={saveBlog}>
-                <Form.Item>
-                    {getFieldDecorator('title', {
-                        rules: [
-                            {required: true, message: 'Please enter a title'}
-                        ],
-                    })(
-                        <Input
-                            placeholder="Blog Title"
-                        />,
-                    )}
-                </Form.Item>
-                <Form.Item>
-                    {getFieldDecorator('slug', {
-                        rules: [
-                            {required: true, message: 'Please enter a user displayable URL'}
-                        ],
-                    })(
-                        <Input
-                            placeholder="Blog URL"
-                        />,
-                    )}
-                </Form.Item>
-                <Form.Item>
+            <Card>
+                <h1>
+                    <span>Add New Blog </span>
                     {
-                        coverImage ? (<p>Cover Image: {coverImage}</p>) : <div/>
+                        loading ?
+                            <Icon type="loading" style={{fontSize: 18}} spin/>
+                            : <div/>
                     }
-                    <Upload fileList={[]}
-                            customRequest={({file, onSuccess, onError}) => uploadCoverImage(file, onSuccess, onError)}>
-                        <Button>
-                            <Icon type="upload"/> Upload Cover Image
-                        </Button>
-                    </Upload>
-
-                </Form.Item>
-                <Form.Item>
-                    <Row>
+                </h1>
+            </Card>
+            <Card>
+                <Form onSubmit={saveBlog}>
+                    <Form.Item label={'Title'}>
+                        {getFieldDecorator('title', {
+                            rules: [
+                                {required: true, message: 'Please enter a title'}
+                            ],
+                        })(
+                            <Input
+                                onChange={(e) => form.setFieldsValue({slug: generateSlug(e.target.value)})}
+                                placeholder="Blog Title"
+                            />,
+                        )}
+                    </Form.Item>
+                    <Form.Item label={'Blog URL'}>
+                        {getFieldDecorator('slug', {
+                            rules: [
+                                {required: true, message: 'Please enter a user displayable URL'}
+                            ],
+                        })(
+                            <Input
+                                placeholder="Blog URL"
+                            />,
+                        )}
+                    </Form.Item>
+                    <Form.Item>
                         {
-                            attachments && attachments.map(attachment => {
-                                return <AttachmentComponent
-                                    {...attachment}
-                                    blogId={blogId}
-                                    key={attachment.url}
-                                    blogUpdated={(data) => setData(data)}
-                                />
-                            })
+                            coverImage ? (<p>Cover Image: {coverImage}</p>) : <div/>
                         }
-                    </Row>
-                    <Button onClick={() => uploadAttachment()}>Upload Attachment</Button>
-                </Form.Item>
-                <Form.Item>
-                    <EditorComponent value={content}
-                                     onChange={(value) => setContent(value)}
-                    />
-                </Form.Item>
-                <Form.Item>
-                    <p>
-                        <Checkbox
-                            style={{paddingRight: '10px'}}
-                            checked={published}
-                            onChange={e => setPublished(e.target.checked)}
+                        <Upload fileList={[]}
+                                customRequest={({file, onSuccess, onError}) => uploadCoverImage(file, onSuccess, onError)}>
+                            <Button>
+                                <Icon type="upload"/> Upload Cover Image
+                            </Button>
+                        </Upload>
+
+                    </Form.Item>
+                    <Form.Item>
+                        <Row>
+                            {
+                                attachments && attachments.map(attachment => {
+                                    return <AttachmentComponent
+                                        {...attachment}
+                                        blogId={blogId}
+                                        key={attachment.url}
+                                        blogUpdated={(data) => setData(data)}
+                                    />
+                                })
+                            }
+                        </Row>
+                        <Button onClick={() => uploadAttachment()}>Upload Attachment</Button>
+                    </Form.Item>
+                    <Form.Item>
+                        <EditorComponent value={content}
+                                         onChange={(value) => setContent(value)}
                         />
-                        Publish
-                    </p>
-                </Form.Item>
-                <Form.Item>
-                    <Button type="primary" htmlType="submit" loading={loading} disabled={loading}>
-                        Save
-                    </Button>
-                </Form.Item>
-            </Form>
+                    </Form.Item>
+                    <Form.Item>
+                        <p>
+                            <Checkbox
+                                style={{paddingRight: '10px'}}
+                                checked={published}
+                                onChange={e => setPublished(e.target.checked)}
+                            />
+                            Publish
+                        </p>
+                    </Form.Item>
+                    <Form.Item>
+                        <Button type="primary" htmlType="submit" loading={loading} disabled={loading}>
+                            Save
+                        </Button>
+                    </Form.Item>
+                </Form>
+            </Card>
             <AttachmentModal
                 visible={attachmentModalVisible}
                 setVisible={setAttachmentModalVisible}

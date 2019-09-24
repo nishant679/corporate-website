@@ -2,7 +2,8 @@ import React, {useState} from "react";
 import {Button, Form, Icon, Input, message} from "antd";
 import Http from "../../../utils/Http";
 import style from './styles.module.scss';
-import {TOKEN, USER_ID} from "../../../utils/constants";
+import {EMAIL, TOKEN, USER_ID} from "../../../utils/constants";
+import {saveUser} from "../../../utils/Auth";
 
 function LoginForm(props) {
     const {getFieldDecorator} = props.form;
@@ -19,12 +20,11 @@ function LoginForm(props) {
         }
         setLoading(true);
         try {
-            const {data} = await Http.post('/admins/login', {
+            const {data: User} = await Http.post('/admins/login', {
                 email: values.email,
                 password: values.password
             });
-            localStorage.setItem(TOKEN, data.token);
-            localStorage.setItem(USER_ID, data._id);
+            saveUser(User);
             setLoading(false);
             props.loggedInSuccessfully()
         } catch (e) {
