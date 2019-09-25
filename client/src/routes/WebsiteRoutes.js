@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Route, Switch} from 'react-router-dom';
 import Navigation from "../components/Navigation/Navigation";
 import LanguageContext from "../utils/LanguageContext";
-
+import LandingPage from '../pages/LandingPage/LandingPage';
 function WebsiteRoutes({match}) {
     const setLanguage = (language) => {
         setState({...state, language: language})
@@ -16,10 +16,10 @@ function WebsiteRoutes({match}) {
     const [state, setState] = useState(initState);
     return (
         <LanguageContext.Provider value={state}>
-            <Navigation/>
+           
             <Switch>
                 <Route exact path={`${match.path}/philosophy`}/>
-                <Route exact path={`${match.path}/`}/>
+                <Route exact path={`${match.path}/`} component={LandingPage}/>
             </Switch>
         </LanguageContext.Provider>
     );
