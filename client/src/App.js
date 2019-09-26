@@ -1,15 +1,15 @@
 import React from "react";
-import {BrowserRouter as Router} from 'react-router-dom'
-import AppRoutes from "./routes/AppRoutes";
+import news from "./containers/news";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 function App() {
-    return (
-        <Router>
-            <div>
-                <AppRoutes/>
-            </div>
-        </Router>
-    );
+  return (
+    <Router>
+      <div>
+        <Route exact path="/newsroom" component={news} />
+      </div>
+    </Router>
+  );
 }
 
 export default App;
