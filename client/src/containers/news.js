@@ -55,7 +55,7 @@ export default class search extends React.Component {
           <div id="____Text___H4___Selected___On__A4_Text_34">
           <span>Contact Us</span>
           <div id="media_mckinleyrice_com">
-          <span>media@mckinleyrice.com</span>
+          <a href="mailto: hello@mckinleyrice.com"><span>media@mckinleyrice.com</span></a>
           </div>
           </div>
           <div id="____Text___H4___Selected___On__A4_Text_35">
