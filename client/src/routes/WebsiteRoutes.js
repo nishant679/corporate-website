@@ -1,8 +1,14 @@
 import React, {useState} from 'react';
 import {Route, Switch} from 'react-router-dom';
-import Navigation from "../components/Navigation/Navigation";
 import LanguageContext from "../utils/LanguageContext";
-import BlogPage from "../pages/blog/BlogPage";
+import Loadable from "react-loadable";
+import {Skeleton} from "antd";
+
+const BlogPage = Loadable({
+    loader: () => import('../pages/blog/BlogPage'),
+    loading: Skeleton,
+});
+
 function WebsiteRoutes({match}) {
     const setLanguage = (language) => {
         setState({...state, language: language})
