@@ -3,7 +3,7 @@
 const {AdminModel} = require('../models/admin.model');
 
 async function seedAdminLogin() {
-    const admin = new AdminModel({email: process.env.ADMIN_EMAIL});
+    const admin = new AdminModel({email: process.env.ADMIN_EMAIL, name: process.env.ADMIN_NAME});
     admin.setPassword(process.env.ADMIN_PASSWORD);
     try {
         await admin.save()

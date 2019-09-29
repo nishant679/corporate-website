@@ -10,7 +10,11 @@ const AttachmentSchema = new Schema({
         url: {
             type: Schema.Types.String,
             required: true
-        }
+        },
+    size: {
+        type: Schema.Types.String,
+        required: true
+    }
 
     }
 );

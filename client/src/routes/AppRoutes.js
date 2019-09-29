@@ -21,7 +21,7 @@ function AppRoutes() {
                 component={AdminRoutes}
             />
             <Route
-                path="/"
+                path="*"
                 component={WebsiteRoutes}
             />
             {

@@ -5,6 +5,7 @@ import Http from "../../../utils/Http";
 import TableHeader from "./TableHeader";
 import TableActionButtons from "./TableActionButtons";
 import styles from './styles.module.scss';
+import {Helmet} from "react-helmet";
 
 function BlogsPage() {
     const [data, setData] = useState([]);
@@ -57,6 +58,9 @@ function BlogsPage() {
 
     return (
         <AdminLayout>
+            <Helmet>
+                <title>Blogs-Mckinley & Rice</title>
+            </Helmet>
             <Table
                 className={styles.table}
                 bordered

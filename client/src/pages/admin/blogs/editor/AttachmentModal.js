@@ -7,6 +7,7 @@ function AttachmentModal({visible, setVisible, OnAttachmentAdded, blogId, form})
     const {getFieldDecorator, setFieldsValue, validateFields} = form;
 
     async function uploadAttachment(file, onSuccess, onError) {
+        console.log(file);
         let values;
         try {
             values = await validateFields();
@@ -47,13 +48,11 @@ function AttachmentModal({visible, setVisible, OnAttachmentAdded, blogId, form})
                         rules: [{required: true, message: 'Title is required!'}],
                     })(<Input/>)}
                 </Form.Item>
-                <Form.Item label="URL: ">
-                    {getFieldDecorator('url', {
-                        rules: [],
-                    })(<Input disabled/>)}
-                </Form.Item>
                 <Form.Item>
-                    <Upload customRequest={({file, onSuccess, onError}) => uploadAttachment(file, onSuccess, onError)}>
+                    <Upload
+                        fileList={[]}
+                        customRequest={({file, onSuccess, onError}) => uploadAttachment(file, onSuccess, onError)}
+                    >
                         <Button>
                             <Icon type="upload"/> Upload Attachment
                         </Button>

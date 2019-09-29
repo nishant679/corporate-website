@@ -5,7 +5,8 @@ import Http from "../../../../utils/Http";
 import EditorComponent from "./EditorComponent";
 import AttachmentModal from "./AttachmentModal";
 import AttachmentComponent from "./AttachmentComponent";
-import {Link} from "react-router-dom"; // ES6
+import {Link} from "react-router-dom";
+import {Helmet} from "react-helmet"; // ES6
 
 function BlogEditPage({match, form, history}) {
     const [content, setContent] = useState('');
@@ -82,6 +83,7 @@ function BlogEditPage({match, form, history}) {
                 history.replace(`${match.path}/${data.blog._id}`)
             }
             setLoading(false);
+            message.success('Blog Post Saved');
             return true;
 
         } catch (e) {
@@ -139,6 +141,9 @@ function BlogEditPage({match, form, history}) {
 
     return (
         <AdminLayout>
+            <Helmet>
+                <title>Blog Editor</title>
+            </Helmet>
             <Card>
                 <h1 onClick={history.goBack} style={{cursor: 'pointer'}}>
                     <Icon type="left"/>

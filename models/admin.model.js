@@ -5,6 +5,9 @@ const jwt = require('jsonwebtoken');
 
 const ADMIN_MODEL = 'AdminModel';
 const AdminSchema = new Schema({
+        name: {
+            type: String
+        },
         email: {
             type: String,
             unique: true,

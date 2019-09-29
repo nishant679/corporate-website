@@ -1,6 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~antd/dist/antd.min.css";
 
+/**
+  Import Bootstrap Grid Only
+ */
+$enable-flex: true;
+$enable-grid-classes: true;
+
+@import '../../node_modules/bootstrap/scss/bootstrap-grid';
+* {
+  box-sizing: border-box;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+}
 .ant-table-thead > tr > th,
 .ant-table-tbody > tr > td {
   /* padding: 16px 16px; /

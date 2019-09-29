@@ -3,6 +3,7 @@ const {BlogModel} = require('../models/blog.model');
 const upload = require('../utils/uploadFileHelper');
 const AppError = require('../utils/AppError');
 const mongoose = require('mongoose');
+const {formatSizeUnits} = require("../utils/utilities");
 /**
  * Create a Blog Post
  */
@@ -100,18 +101,26 @@ exports.show = async function (req, res, next) {
     const slug = req.params.slug;
     try {
         const blog = await BlogModel.findOneAndUpdate({
-                slug
+                slug,
+                published: true
             },
             {
                 $inc: {views: 1}
-            });
+            }).populate('createdBy').exec();
         if (!blog) {
             throw new AppError('Blog Not Found', 404)
         }
-        const relatedBlogs = await BlogModel.find({},
+        const relatedBlogs = await BlogModel.find(
+            {
+                published: true,
+                _id: {
+                    $ne: blog._id
+                }
+            },
             {
                 title: 1,
                 slug: 1,
+                coverImage: 1,
             },
             {
                 limit: 3,
@@ -157,7 +166,8 @@ exports.uploadAttachment = async function (req, res, next) {
         const file = await upload(req, res);
         blogPost.attachments.push({
             title: req.body.title,
-            url: `${process.env.STATIC_FILES_DOMAIN}/${file.path}`
+            url: `${process.env.STATIC_FILES_DOMAIN}/${file.path}`,
+            size: formatSizeUnits(file.size)
         });
         const result = await blogPost.save();
         res.json(result);
