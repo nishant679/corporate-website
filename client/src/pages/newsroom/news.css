@@ -1449,3 +1449,13 @@ top: 1080px;
     font-weight: bold;
     color: black !important;
 }
+
+.rectangle{
+    width: 230px;
+    height: 230px;
+}
+
+.rectangle-big{
+    width: 230px;
+    height: 230px;
+}
