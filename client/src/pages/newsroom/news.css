@@ -46,11 +46,12 @@
 }
 
 .rectangle{
-    width: 230px;
-    height: 230px;
+    width: 100%;
+    padding: 45%;
 }
 
 .rectangle-big{
-    width: 230px;
-    height: 230px;
+    width: 100%;
+    padding: 60%;
+
 }
