@@ -8,3 +8,5 @@ Routes
 - /newsroom : The Newsroom Page
 - /social : The Social Media Landing Page
 - /admin : The Admin Panel
+- /careers : The Career Page
+- /ideas/:slug : The Blog Page
