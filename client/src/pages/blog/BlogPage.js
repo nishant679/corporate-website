@@ -6,6 +6,7 @@ import AttachmentComponent from "./AttachmentComponent";
 import style from './BlogPage.module.scss';
 import {Skeleton} from "antd";
 import RelatedArticles from "./RelatedArticles";
+import Footer from "../../components/Footer/Footer";
 
 function BlogPage({match}) {
     const [loading, setLoading] = useState(true);
@@ -77,6 +78,7 @@ function BlogPage({match}) {
             <RelatedArticles
                 relatedArticles={relatedBlogs}
             />
+            <Footer/>
         </div>
     );
 }
