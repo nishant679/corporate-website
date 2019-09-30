@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 
 export default class Form extends Component {
     state={
@@ -43,15 +43,15 @@ export default class Form extends Component {
                     </div>
                     <div className="form-row">
                         <div className="form-group-div col-md-6">
-                            <select id="fcountry" placeholder="From Country" className="form-group-select" onChange={this.handleChange} > 
-                                <option selected="true" disabled="disabled">From Country</option>
+                            <select id="fcountry" placeholder="From Country" className="form-group-select" onChange={this.handleChange} >
+                                <option disabled>From Country</option>
                                 <option value="....">.....</option>
                                 <option value="....">.....</option>
                             </select>
                         </div>
                         <div className="form-group-div col-md-6">
                             <select id="tcountry" placeholder="To Country" className="form-group-select" onChange={this.handleChange} >
-                                <option selected="true" disabled="disabled">To Country</option> 
+                                <option disabled>To Country</option>
                                 <option value="....">....</option>
                                 <option value="....">....</option>
                             </select>
@@ -59,15 +59,15 @@ export default class Form extends Component {
                     </div>
                     <div className="form-row">
                         <div className="form-group-div col-md-6">
-                            <select id="industry" placeholder="From Country" className="form-group-select" onChange={this.handleChange} > 
-                                <option selected="true" disabled="disabled">Industry</option>
+                            <select id="industry" placeholder="From Country" className="form-group-select" onChange={this.handleChange} >
+                                <option disabled>Industry</option>
                                 <option value="....">....</option>
                                 <option value="....">....</option>
                             </select>
                         </div>
                         <div className="form-group-div col-md-6">
-                            <select id="expansion" placeholder="expansion" className="form-group-select" onChange={this.handleChange} > 
-                                <option selected="true" disabled="disabled">Type of Expansion</option>
+                            <select id="expansion" placeholder="expansion" className="form-group-select" onChange={this.handleChange} >
+                                <option disabled>Type of Expansion</option>
                                 <option value="....">....</option>
                                 <option value="....">....</option>
                             </select>

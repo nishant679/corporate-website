@@ -1,11 +1,16 @@
 import React from 'react'
 import classNames from 'classnames'
-import style from'./carrers.module.css'
+import style from './careers.module.css'
+import Footer from "../../components/Footer/Footer";
+import {Helmet} from "react-helmet";
 
-class Carrers extends React.Component{
+class Careers extends React.Component {
     render() {
       return (
         <React.Fragment>
+            <Helmet>
+                <title>Careers</title>
+            </Helmet>
           <div className={classNames(style.jumbotron, 'jumbotron')} >
             <img src={require('../../assets/19.jpg')}  style={{height: "725px",width:"500px", float: "right", paddingLeft: "0px", paddingTop: "0px"}} />
             <img src={require('../../assets/logo.png')} width="50" height="50" style={{margin:"2% 5% 0%"}}/>
@@ -54,10 +59,10 @@ class Carrers extends React.Component{
               </div>
 
               <div className={classNames('row', style.Imagerow)}>
-                <div>
+                  <div className="col-md-6">
                   <img src={require('../../assets/3.jpg')} className={classNames(style.Image)} />
                 </div>
-                <div className={classNames(style.headline)}>
+                  <div className={classNames(style.headline, 'col-md-5')}>
                   <p className={classNames(style.headline1)}>HEADLINES</p>
                   <p className={classNames(style.headline2)}>IoT from 5,000 miles away, completely blin</p>
                   <p className={classNames(style.headline3)}>It was pretty orchestrated, which is what you'd expect of the people.It was pretty orchestrated, which is what you'd expect of the people.</p>
@@ -65,21 +70,20 @@ class Carrers extends React.Component{
               </div>
 
 
-
-              <div className="row offset-1">
-                <div style={{paddingRight: "35px"}}>
+                <div className="row">
+                    <div className="col-md-3" style={{paddingLeft: '25px'}}>
                     <img src={require('../../assets/18.png')} className={classNames(style.jobImage)} />
                     <p className={classNames(style.jobTitle)}>Undergraduate Internships</p>                                    
                     <p className={classNames(style.jobContent)}>It was pretty orchestrated, which is what you'd expect</p>
                     <button className={classNames(style.jobButton)}>Apply</button>                  
                 </div>
-                <div style={{paddingRight: "35px"}} >                  
+                    <div className="offset-md-1 col-md-3">
                     <img src={require('../../assets/18.png')} className={classNames(style.jobImage)}/>                                   
                     <p className={classNames(style.jobTitle)}>Undergraduate Recruitments</p>                                
                     <p className={classNames(style.jobContent)}>It was pretty orchestrated, which is what you'd expect</p>
                     <button className={classNames(style.jobButton)}>Apply</button>                 
                 </div>
-                <div > 
+                    <div className="offset-md-1 col-md-3">
                     <img src={require('../../assets/18.png')} className={classNames(style.jobImage)} />
                     <p className={classNames(style.jobitle)}>Open Internships</p>
                     <p className={classNames(style.jobContent)}>It was pretty orchestrated, which is what you'd expect</p>
@@ -101,8 +105,10 @@ class Carrers extends React.Component{
                 </div>
               </div>
             </div>
+            <Footer/>
         </React.Fragment>       
       )
     } 
   }
-  export default Carrers;
+
+export default Careers;

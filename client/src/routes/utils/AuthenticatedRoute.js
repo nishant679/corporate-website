@@ -1,10 +1,10 @@
 import React from "react";
-import {Route, Redirect} from "react-router-dom";
+import {Redirect, Route} from "react-router-dom";
 
-function AuthenticatedRoute({component: Component, props: cProps, ...rest}) {
+function AuthenticatedRoute({component: Component, props: cProps, restProps}) {
 
     return <Route
-        {...rest}
+        {...restProps}
         render={props =>
             localStorage.getItem('access_token')
                 ? <Component {...props} {...cProps} />

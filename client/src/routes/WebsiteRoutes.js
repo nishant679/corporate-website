@@ -4,7 +4,7 @@ import LanguageContext from "../utils/LanguageContext";
 import Loadable from "react-loadable";
 import {Skeleton} from "antd";
 import LandingPage from '../pages/LandingPage/LandingPage';
-import Carrers from '../pages/CarrersPage/Carrers';
+import Careers from '../pages/CareersPage/Careers';
 
 const BlogPage = Loadable({
     loader: () => import('../pages/blog/BlogPage'),
@@ -37,9 +37,9 @@ function WebsiteRoutes({match}) {
                 <Route exact path={`${match.path}/newsroom`} component={NewsPage} />
                 <Route exact path={`${match.path}/ideas/:slug`} component={BlogPage}/>
                 <Route exact path={`${match.path}/philosophy`}/>
-                <Route exact path={`${match.path}/`}/>
-                <Route exact path={`${match.path}/carrers`} component={Carrers}/>
+                <Route exact path={`${match.path}/careers`} component={Careers}/>
                 <Route exact path={`${match.path}/social`} component={LandingPage}/>
+                <Route exact path={`${match.path}/`}/>
             </Switch>
         </LanguageContext.Provider>
     );

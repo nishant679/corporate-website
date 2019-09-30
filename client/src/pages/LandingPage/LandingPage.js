@@ -1,20 +1,25 @@
 import React from 'react'
 import './style.css'
 import Form from './Form'
-import Header from './Header'
 import Video from './Video'
 import Blocks from './Blocks'
 import BlockSection from './BlockSection'
 import Title from './Title'
 import EconomySection from './EconomySection'
 import FrontPage from './FrontPage'
+import Footer from "../../components/Footer/Footer";
+import Navigation from "../../components/Navigation/Navigation";
+import {Helmet} from "react-helmet";
 
 class LandingPage extends React.Component{
     render() {
       return (
         <div>
+            <Helmet>
+                <title>Social Landing</title>
+            </Helmet>
             <div className="container">
-                <Header />
+                <Navigation/>
                 <FrontPage />
             </div>
             <Video />
@@ -32,7 +37,8 @@ class LandingPage extends React.Component{
                     </div>
                 </div>
             </div>
-           <BlockSection />            
+            <BlockSection/>
+            <Footer/>
         </div>          
       )
     }

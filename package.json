@@ -6,7 +6,7 @@
     "start": "node ./bin/www",
     "dev:server": "nodemon --ignore './client/' --ignore './public/' ./bin/www ",
     "dev:client": "cd client && npm start",
-    "dev": "npm-run-all -p dev:**"
+    "dev": "npm-run-all --parallel dev:server dev:client"
   },
   "dependencies": {
     "body-parser": "^1.19.0",

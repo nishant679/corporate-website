@@ -1,22 +1,23 @@
 import React, {useContext} from 'react';
 import LanguageContext from "../../utils/LanguageContext";
-import NavigationMessages from "./NavigationMessages";
-import Text from "../Text/Text";
-import style from './style.module.scss';
-import Footer from '../Footer/Footer'
+
 function Navigation() {
     const {language, setLanguage} = useContext(LanguageContext);
     return (
-        <React.Fragment>
-            <button className={style.nav} onClick={() => setLanguage("ko")}>
-                Switch Language (Current: {language})
-            </button>
-            <button className={style.nav} onClick={() => setLanguage("en")}>
-                Switch Language (Current: {language})
-            </button>
-            <Text text={NavigationMessages.philosophy}/>
-            <Footer />
-        </React.Fragment>
+        <div className="row">
+            <div className="col-md-1">
+                <img src={require('../../assets/logo.png')} width="50" height="50" style={{marginTop: "30px"}}/>
+            </div>
+            <div className="col-md-4 " style={{fontSize: "18px", fontFamily: "Helvetica", marginTop: "30px"}}>
+                <p>Tech has no borders</p>
+            </div>
+            <div className="offset-md-5 col-md-2" style={{fontSize: "18px", fontFamily: "Helvetica"}}>
+                <select className="dropdown" onChange={(event) => setLanguage(event.target.value)} value={language}>
+                    <option value="en">English</option>
+                    <option value="ko">Korean</option>
+                </select>
+            </div>
+        </div>
     )
 }
 
