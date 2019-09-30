@@ -8,6 +8,10 @@ const BlogPage = Loadable({
     loader: () => import('../pages/blog/BlogPage'),
     loading: Skeleton,
 });
+const NewsPage = Loadable({
+    loader: () => import('../pages/newsroom/news'),
+    loading: Skeleton,
+});
 
 function WebsiteRoutes({match}) {
     const setLanguage = (language) => {
@@ -24,6 +28,7 @@ function WebsiteRoutes({match}) {
         <LanguageContext.Provider value={state}>
             {/*<Navigation/>*/}
             <Switch>
+                <Route exact path={`${match.path}/newsroom`} component={NewsPage} />
                 <Route exact path={`${match.path}/ideas/:slug`} component={BlogPage}/>
                 <Route exact path={`${match.path}/philosophy`}/>
                 <Route exact path={`${match.path}/`}/>

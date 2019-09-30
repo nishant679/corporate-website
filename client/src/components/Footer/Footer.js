@@ -19,7 +19,7 @@ class Footer extends Component {
 
   render() {
     return (
-        <div className="container-fluid" style={{marginTop: '100px'}}>
+        <div className="container-fluid" style={{marginTop: '100px', background: 'white'}}>
             <div className="row">
                 <div className="col-md-2 text-center">
                     <p style={{color: 'white' , backgroundColor: 'black' , padding: '5px' , borderRadius: '5px' , textAlign: 'center' , fontWeight: 'bold'}}>mckinley &amp; Rice</p>
