@@ -5,16 +5,16 @@ import {Skeleton} from 'antd';
 import AuthenticatedRoute from "./utils/AuthenticatedRoute";
 
 const LoginPage = Loadable({
-    loader: () => import('../pages/admin/login/LoginPage'),
+    loader: () => import('../pages/admin/login/LoginPage').catch(console.error),
     loading: Skeleton,
 });
 const BlogsPage = Loadable({
-    loader: () => import('../pages/admin/blogs/BlogsPage'),
+    loader: () => import('../pages/admin/blogs/BlogsPage').catch(console.error),
     loading: Skeleton,
 });
 
 const BlogEditor = Loadable({
-    loader: () => import('../pages/admin/blogs/editor/BlogEditPage'),
+    loader: () => import('../pages/admin/blogs/editor/BlogEditPage').catch(console.error),
     loading: Skeleton,
 });
 

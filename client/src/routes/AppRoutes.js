@@ -4,12 +4,12 @@ import Loadable from 'react-loadable';
 import React from "react";
 
 const AdminRoutes = Loadable({
-    loader: () => import('./AdminRoutes'),
+    loader: () => import('./AdminRoutes').catch(console.error),
     loading: Skeleton,
 });
 
 const WebsiteRoutes = Loadable({
-    loader: () => import('./WebsiteRoutes'),
+    loader: () => import('./WebsiteRoutes').catch(console.error),
     loading: Skeleton,
 });
 

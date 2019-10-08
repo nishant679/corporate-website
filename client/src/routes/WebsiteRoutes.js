@@ -1,19 +1,19 @@
 import React, {useState} from 'react';
 import {Route, Switch} from 'react-router-dom';
 import LanguageContext from "../utils/LanguageContext";
-import Loadable from "react-loadable";
-import {Skeleton} from "antd";
 import LandingPage from '../pages/LandingPage/LandingPage';
 import Careers from '../pages/CareersPage/Careers';
+import BlogPage from "../pages/blog/BlogPage";
+import NewsPage from '../pages/newsroom/news';
 
-const BlogPage = Loadable({
-    loader: () => import('../pages/blog/BlogPage'),
+/*const BlogPage = Loadable({
+    loader: () => import('../pages/blog/BlogPage').catch(console.error),
     loading: Skeleton,
 });
 const NewsPage = Loadable({
-    loader: () => import('../pages/newsroom/news'),
+    loader: () => import('../pages/newsroom/news').catch(console.error),
     loading: Skeleton,
-});
+});*/
 
 
 
@@ -36,7 +36,6 @@ function WebsiteRoutes({match}) {
             <Switch>
                 <Route exact path={`${match.path}/newsroom`} component={NewsPage} />
                 <Route exact path={`${match.path}/ideas/:slug`} component={BlogPage}/>
-                <Route exact path={`${match.path}/philosophy`}/>
                 <Route exact path={`${match.path}/careers`} component={Careers}/>
                 <Route exact path={`${match.path}/social`} component={LandingPage}/>
                 <Route exact path={`${match.path}/`}/>
