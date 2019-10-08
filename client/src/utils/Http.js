@@ -5,6 +5,6 @@ import {TOKEN} from "./constants";
 export default create({
     baseURL: `${config.API_URL}/api`,
     headers: {
-        Authorization: localStorage.getItem(TOKEN).toString()
+        Authorization: localStorage.getItem(TOKEN) ? localStorage.getItem(TOKEN).toString() : null
     }
 });
