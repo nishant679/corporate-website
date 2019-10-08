@@ -28,3 +28,12 @@ Routes
 - /admin : The Admin Panel
 - /careers : The Career Page
 - /ideas/:slug : The Blog Page
+
+###Production 
+
+- Update Api Server Url and Port in `client/src/config/config.js`
+- Update `STATIC_FILES_DOMAIN` in `.env`
+- Build React App Run `npm run production` in `PROJECT_ROOT`
+- Run npm start in `PROJECT_ROOT` to serve production node+react app on :5000
+
+[Run Node In Production with Auto Restart](https://www.npmjs.com/package/pm2)
