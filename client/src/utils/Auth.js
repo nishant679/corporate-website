@@ -8,7 +8,7 @@ export function logout(history) {
 }
 
 export function saveUser(user) {
-    localStorage.setItem(TOKEN, user.token);
+    localStorage.setItem(TOKEN, JSON.stringify(user.token));
     localStorage.setItem(EMAIL, user.email);
     localStorage.setItem(USER_ID, user._id);
 }
